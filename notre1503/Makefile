@@ -25,6 +25,8 @@ RM = rm -f
 
 # Флаги компилятора
 CFLAGS = -Wall -Werror -Wextra -I./mlx -I./libft -g3
+#CFLAGS = -Wall -Wextra -g -fsanitize=address -I./mlx -I./libft -g3
+
 
 # Линковочные флаги для MinilibX
 LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -L./libft -lft

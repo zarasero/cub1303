@@ -25,7 +25,7 @@ void	parsing_map(t_data *data)
 	if (is_map_closed(data->new_map, max_len + 1, data->map_lines + 2, 0)
 		== false)
 		err(data, MAP_OPENED);
-	//data->map_width = (max_len + 1);
+	data->map_width = (max_len + 1);
 	print_char_tab(data->new_map);
 }
 

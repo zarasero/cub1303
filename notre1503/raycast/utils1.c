@@ -1,18 +1,15 @@
 
 #include "../include/cub3d.h"
 
-int get_sign(float value)
-{
-    if (value < 0)
-        return (-1);
-    return (1);
+int get_sign(float num) {
+    return (num > 0) - (num < 0);
 }
+
 
 int ft_destroy_exit(t_data *data)
 {
     int i;
 
-    free_all(data);
     mlx_clear_window(data->mlx, data->win);
     if (data->win)
         mlx_destroy_window(data->mlx, data->win);
@@ -27,5 +24,8 @@ int ft_destroy_exit(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
+
+    
+    free_all(data);
     exit(0);
 }

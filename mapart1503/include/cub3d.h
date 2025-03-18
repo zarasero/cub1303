@@ -12,8 +12,8 @@
 # define M_PI 3.14159265358979323846
 
 
-# define WINDOW_W 800
-# define WINDOW_H 600
+# define WINDOW_W 1800
+# define WINDOW_H 1600
 
 # define VIEW_ANGLE (M_PI / 3)
 
@@ -62,6 +62,7 @@ typedef struct {
     t_image img;  // Изображение для рендеринга
     int textur_index;  // Индекс текущей текстуры
     float textur_shift;   // Смещение в текстуре
+    int minimap;
 
 } t_data;
 

@@ -77,5 +77,5 @@ int	map_line_max_lenght(char **map)
 bool	is_valid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'S' || c == 'W'
-		|| c == 'E' || c == 'N');
+		|| c == 'E' || c == 'N' || c == 'D');
 }

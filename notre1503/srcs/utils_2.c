@@ -15,7 +15,7 @@
 bool	is_starting_point(char **map, int i, int j)
 {
 	if (map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E'
-		|| map[i][j] == 'N')
+		|| map[i][j] == 'N' || map[i][j] == 'D')
 		return (true);
 	else
 		return (false);

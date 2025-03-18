@@ -34,10 +34,10 @@ void	free_all(t_data *data)
 		free(data->c_color);
 	if (data->f_color != NULL)
 		free(data->f_color);
-	if (data->path_text[1] != NULL)
-		free(data->path_text[1]);
 	if (data->path_text[0] != NULL)
 		free(data->path_text[0]);
+	if (data->path_text[1] != NULL)
+		free(data->path_text[1]);
 	if (data->path_text[2] != NULL)
 		free(data->path_text[2]);
 	if (data->path_text[3] != NULL)

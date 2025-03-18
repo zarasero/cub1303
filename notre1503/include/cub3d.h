@@ -12,15 +12,15 @@
 # define M_PI 3.14159265358979323846
 
 
-# define WINDOW_W 400
-# define WINDOW_H 300
+# define WINDOW_W 800
+# define WINDOW_H 600
 
 # define VIEW_ANGLE (M_PI / 3)
 
 # include "libft.h"
 
-// # include <X11/keysym.h>
-// # include <X11/X.h>
+ # include <X11/keysym.h>
+ # include <X11/X.h>
 # include <fcntl.h>
 # include <stdbool.h>
 
@@ -41,23 +41,34 @@
 
 
 typedef struct s_texture {
-    void *img;
-    int width;
-    int height;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
-    char *addr;
+    void *img;          // Указатель на изображение (текстуру)
+    int width;          // Ширина текстуры в пикселях
+    int height;         // Высота текстуры в пикселях
+    int bits_per_pixel; // Количество бит на пиксель (глубина цвета)
+    int line_length;    // Количество байтов на строку изображения
+    int endian;         // Порядок хранения байтов (0 - little-endian, 1 - big-endian)
+    char *addr;         // Указатель на адрес пиксельных данных изображения
 } t_texture;
+
+/*img – основной указатель наmlx_xpm_file_to_image().
+width, height – размеры текстуры.
+bits_per_pixel – определяет,
+line_length – количество байтов в одной строк
+endian – порядок хранения данных: 0 (младший порядок) или 1 (старший порядок).
+addr – указатель на пиксmlx_get_data_addr().
+
+t_texture хранит текстуры (например, стены, двери).
+t_image – это просто буфер для вывода итогового изображения на экран.*/
 
 
 typedef struct s_image {
-    void *img;
-    char *addr;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
+    void *img;          // Указатель на изображение
+    char *addr;         // Указатель на массив пикселей изображения
+    int bits_per_pixel; // Количество бит на пиксель
+    int line_length;    // Количество байтов на строку изображения
+    int endian;         // Порядок хранения данных
 } t_image;
+
 
 typedef struct s_draw_params {
     float line_height;
@@ -66,7 +77,27 @@ typedef struct s_draw_params {
     t_texture *texture;
 } t_draw_params;
 
-
+// Структура для работы с лучами
+typedef struct s_ray {
+    float direction_x;
+    float direction_y;
+    int step_x;
+    int step_y;
+    float delta_x;  // 🛠️ Добавляем, если его нет
+    float delta_y;  // 🛠️ Добавляем, если его нет
+    float ray_dir_x;  // 🛠️ Проверь, что это поле есть
+    float ray_dir_y;  // 🛠️ Проверь, что это поле есть
+    float next_vertical_x;
+    float next_vertical_y;
+    float next_horizontal_x;
+    float next_horizontal_y;
+    float vertical_distance;
+    float horizontal_distance;
+    float texture_x; 
+    float texture_y;
+        int map_x;
+    int map_y;
+} Ray;
 typedef struct {
     int		map_lines;
 	int		map_start;
@@ -95,26 +126,18 @@ typedef struct {
     t_image img;  // Изображение для рендеринга
     int textur_index;  // Индекс текущей текстуры
     float textur_shift;   // Смещение в текстуре
+    t_image minimap_img;
 
+
+    int npc_color;    // Цвет NPC
+    int wall_color;   // Цвет стены
+    int map_scale;    // Масштаб карты
+    int minimap;
+
+    t_texture door_texture;
 } t_data;
 
-// Структура для работы с лучами
-typedef struct s_ray {
-    float direction_x;
-    float direction_y;
-    float step_x;
-    float step_y;
-    float next_vertical_x;
-    float next_vertical_y;
-    float next_horizontal_x;
-    float next_horizontal_y;
-    float vertical_distance;
-    float horizontal_distance;
-    float texture_x; 
-    float texture_y;
-        int map_x;
-    int map_y;
-} Ray;
+void toggle_door(t_data *data);
 
 void part_2(t_data *data);
 int ft_prepare_texture(t_data *data, float distance, t_draw_params *params);

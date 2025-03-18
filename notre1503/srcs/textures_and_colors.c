@@ -98,6 +98,7 @@ void	extract_valid_colors(t_data *data)
 			data->f_color = find_rgb_colors(data->file[i],
 					data->f_color, 0, data);
 			color_is_valid(data->f_color, data);
+			data->color_floor = (data->f_color[0] << 16) | (data->f_color[1] << 8) | data->f_color[2];
 		}
 		else if (ft_strncmp(data->file[i], "C", 1) == 0)
 		{
@@ -105,6 +106,7 @@ void	extract_valid_colors(t_data *data)
 			data->c_color = find_rgb_colors(data->file[i],
 					data->c_color, 0, data);
 			color_is_valid(data->c_color, data);
+			data->color_ceiling = (data->c_color[0] << 16) | (data->c_color[1] << 8) | data->c_color[2];
 		}
 		i++;
 	}
